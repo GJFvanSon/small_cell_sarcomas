@@ -7,6 +7,7 @@ DNA-analysis contains scripts to perform whole genome sequencing analysis includ
  - CNV detection
  - Mutational signature analysis
  - visualisation using circos plots
+
 Samples which were sampled at different timepoints were also analysed for subclonal evolution using pyclone-VI
 
 RNA samples were mapped with STAR and reads were counted using subreads.
