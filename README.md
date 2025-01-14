@@ -1,11 +1,9 @@
-# Ewing_like_sarcomas
+# Small cell sarcomas
  
-Complete analysis of the genomics and transcriptomics of a ewing(-like) sarcoma biobank.
+Complete analysis of the genomics and transcriptomics of a small cell sarcoma biobank.
 DNA-analysis contains scripts to perform whole genome sequencing analysis including:
- - SNV detection
- - SV detection
- - CNV detection
  - Mutational signature analysis
+ - fusion transcirpt analysis
  - visualisation using circos plots
 
 Samples which were sampled at different timepoints were also analysed for subclonal evolution using pyclone-VI
