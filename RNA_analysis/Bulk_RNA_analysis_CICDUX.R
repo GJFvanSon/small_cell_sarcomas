@@ -17,7 +17,7 @@ library(enrichR)
 library(Seurat)
 library(readxl)
 library(viridis)
-setwd("/Users/gijsvanson/OneDrive - Prinses Maxima Centrum/Femke/CIC_DUX4/RNA_BULK/")
+setwd("/Users/g.j.f.vanson/OneDrive - Prinses Maxima Centrum/Femke/CIC_DUX4/RNA_BULK/")
 
 ############ count data files processing ####################
 # files <- list.files("New_count_files/", full.names = T)
@@ -191,7 +191,7 @@ EWSFLI_genes <- unique(chip_peaks_EWS$Gene_id)
 
 # overlap gene names from chipseq whith differentially expressed genes.
 res_ewing_fli <- results(dds, name = "FusionEWS.FLI1")
-res_significant <- res_ewing_fli[which(res_ewing_fli$padj < 0.05),]
+res_significant <- res_ewing_fli[which(res_ewing_fli$padj < 0.01),]
 ewing_fli_sign_res <- res_significant
 interesting_genes_EWSFLI <- res_significant[intersect(rownames(res_significant), EWSFLI_genes),]
 interesting_genes_EWSFLI <- interesting_genes_EWSFLI[which(interesting_genes_EWSFLI$log2FoldChange > 0),]
@@ -209,7 +209,7 @@ res_significant <- res_ewing_erg[which(res_ewing_erg$padj < 0.05),]
 ewing_erg_sign_res <- res_significant
 interesting_genes_EWSERG <- res_significant[intersect(rownames(res_significant), EWSERG_genes),]
 interesting_genes_EWSERG <- interesting_genes_EWSERG[which(interesting_genes_EWSERG$log2FoldChange > 0),]
-interesting_genes_EWSERG <- interesting_genes_EWSERG[order(interesting_genes_EWSERG$padj),]
+interesting_genes_EWSERG <- interesting_genes_EWSERG[order(interesting_genes_EWSERG$log2FoldChange, decreasing = T),]
 
 res_ewing_bcor <- results(dds, name = "FusionBCOR")
 res_significant <- res_ewing_bcor[which(res_ewing_bcor$padj < 0.05),]
@@ -240,7 +240,7 @@ pheatmap(assay(ntd)[c(rownames(interesting_genes_EWSFLI)[c(1:20)],
 enrichR::listEnrichrDbs()$libraryName
 EWS_FLI_enrich <- as.data.frame(enrichr(rownames(interesting_genes_EWSFLI)[c(1:100)], "GO_Molecular_Function_2023"))[c(1:8),]
 EWS_FLI_enrich$fusion <- "EWSR1-FLI1"
-EWS_ERG_enrich <- as.data.frame(enrichr(rownames(interesting_genes_EWSERG)[c(1:100)], "GO_Molecular_Function_2023"))[c(1:2),]
+EWS_ERG_enrich <- as.data.frame(enrichr(rownames(interesting_genes_EWSERG)[c(1:100)], "GO_Molecular_Function_2023"))[c(99,75),]
 EWS_ERG_enrich$fusion <- "EWSR1-ERG"
 CIC_DUX_enrich <- as.data.frame(enrichr(rownames(interesting_genes_CICDUX)[c(1:100)], "GO_Molecular_Function_2023"))[c(1:8),]
 CIC_DUX_enrich$fusion <- "CIC-DUX4"
